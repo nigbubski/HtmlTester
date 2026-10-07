@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AminoShop - Tor Guide</title>
     <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #111111;
+            --text-muted: #555555;
+            --green-accent: #2ecc71;
+            --green-badge: #e8f8f0;
+            --red-accent: #e74c3c;
+            --red-badge: #fdeaea;
+            --border-radius: 16px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -13,8 +26,8 @@
         }
 
         body {
-            background-color: #f7f7f9;
-            color: #111111;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,386 +35,554 @@
             padding: 20px;
         }
 
-        /* Container mimic of a 9:16 mobile/reel slide aspect ratio */
-        .spa-container {
-            background: #ffffff;
-            width: 100%;
+        .container {
             max-width: 480px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 30px 24px;
             border-radius: 24px;
-            padding: 32px 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            position: relative;
+            box-shadow: var(--shadow);
         }
 
         /* Top Badges */
         .top-badges {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             gap: 12px;
-            width: 100%;
+            margin-bottom: 24px;
         }
 
         .badge {
-            display: inline-flex;
+            flex: 1;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            padding: 8px 14px;
+            padding: 10px;
             border-radius: 30px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            background: #f0f0f4;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
         .badge-green {
-            background-color: #e2f7ec;
-            color: #107c41;
+            background-color: var(--green-badge);
+            color: #1e7e34;
         }
 
         .badge-red {
-            background-color: #fdebee;
-            color: #a80000;
+            background-color: var(--red-badge);
+            color: #bd2130;
         }
 
         .badge svg {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             fill: currentColor;
         }
 
-        /* Header Section */
+        /* Header */
         header {
             text-align: center;
-            margin-bottom: 8px;
+            margin-bottom: 32px;
         }
 
         header h1 {
-            font-size: 26px;
+            font-size: 1.6rem;
             font-weight: 800;
-            line-height: 1.25;
-            color: #000000;
+            line-height: 1.3;
             letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
 
-        /* Main Guidesteps */
-        .steps-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.4;
         }
 
+        /* Step Card CSS */
         .step-card {
-            background: #ffffff;
-            border: 1px solid #eaeaea;
-            border-radius: 20px;
+            background: var(--bg-color);
+            border-radius: var(--border-radius);
             padding: 20px;
-            display: flex;
-            gap: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
             position: relative;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
         }
 
         .step-number {
-            width: 42px;
-            height: 42px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            font-weight: 800;
-            color: #ffffff;
-            flex-shrink: 0;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
         }
 
-        .step-card:nth-child(1) .step-number { background-color: #43a047; }
-        .step-card:nth-child(2) .step-number { background-color: #880e4f; }
-        .step-card:nth-child(3) .step-number { background-color: #2e7d32; }
-
-        .step-content {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-        }
+        .step-1 .step-number { background-color: var(--green-accent); }
+        .step-2 .step-number { background-color: var(--red-accent); }
+        .step-3 .step-number { background-color: var(--green-accent); }
 
         .step-title {
-            font-size: 18px;
+            font-size: 1.1rem;
             font-weight: 700;
-            color: #000000;
-            margin-top: 6px;
         }
 
-        .step-icons {
-            display: flex;
-            gap: 16px;
-            margin: 4px 0;
-            color: #555;
-        }
-
-        .step-icons svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-        }
-
-        .step-details {
-            font-size: 13px;
-            color: #444444;
-            line-height: 1.5;
-        }
-
-        .step-details ul {
-            list-style: none;
-        }
-
-        .step-details li {
-            margin-bottom: 4px;
-            position: relative;
-        }
-
-        /* Shop Preview Box in Step 3 */
-        .shop-preview {
-            border: 1px solid #e2e2e2;
+        /* Dynamic OS Section */
+        .os-detector {
+            background: white;
             border-radius: 12px;
-            padding: 12px;
-            margin-top: 8px;
-            background: #fafafa;
+            padding: 14px;
+            margin-top: 10px;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .shop-preview-header {
+        .os-status {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #222;
         }
 
-        .shop-preview-vials {
+        .os-status span {
+            color: var(--green-accent);
+        }
+
+        .download-btn {
             display: flex;
-            justify-content: space-around;
-            gap: 8px;
-        }
-
-        .vial {
-            background: #fff;
-            border: 1px solid #eaeaea;
-            border-radius: 6px;
-            padding: 6px;
-            text-align: center;
-            flex: 1;
-        }
-
-        .vial-cap {
-            width: 14px;
-            height: 6px;
-            background: #999;
-            margin: 0 auto 2px;
-            border-radius: 2px;
-        }
-        .vial:nth-child(1) .vial-cap { background: #b71c1c; }
-        .vial:nth-child(2) .vial-cap { background: #2e7d32; }
-        .vial:nth-child(3) .vial-cap { background: #e65100; }
-
-        .vial-bottle {
-            width: 20px;
-            height: 26px;
-            border: 1px solid #bbb;
-            margin: 0 auto 4px;
-            border-radius: 3px;
-            background: rgba(0,0,0,0.02);
-        }
-
-        .vial-label {
-            font-size: 8px;
-            font-weight: bold;
-            color: #666;
-            text-transform: uppercase;
-        }
-
-        /* QR Code Block */
-        .qr-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 8px;
-        }
-
-        .qr-placeholder {
-            width: 140px;
-            height: 140px;
-            border: 1px dashed #cccccc;
-            border-radius: 16px;
-            background: #fafafa;
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            background: var(--text-main);
+            color: white;
+            text-decoration: none;
             padding: 12px;
-            text-align: center;
-            cursor: pointer;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
             transition: background 0.2s;
         }
 
-        .qr-placeholder:hover {
-            background: #f3f3f5;
+        .download-btn:hover {
+            background: #333;
         }
 
-        .qr-placeholder svg {
-            width: 32px;
-            height: 32px;
-            fill: #999999;
+        .download-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
 
-        .qr-placeholder span {
-            font-size: 11px;
+        .all-links-toggle {
+            display: block;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .all-links {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            gap: 8px;
+            flex-direction: column;
+        }
+
+        .all-links a {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .all-links a:hover {
+            color: var(--text-main);
+            background: #fafafa;
+        }
+
+        /* Step 2 Flex Elements */
+        .step-2-content {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .link-copy-container {
+            flex: 1;
+        }
+
+        .onion-input-wrapper {
+            display: flex;
+            background: white;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .onion-link-text {
+            flex: 1;
+            padding: 10px 12px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #555;
+            background: #fafafa;
+            border: none;
+        }
+
+        .copy-btn {
+            background: var(--text-main);
+            color: white;
+            border: none;
+            padding: 0 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover { background: #333; }
+        .copy-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+        .qr-side-box {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 2px dashed rgba(0,0,0,0.15);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 4px;
+            flex-shrink: 0;
+        }
+
+        .qr-side-box svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+            fill: #aaa;
+        }
+
+        /* Step 3 Screenshot Mockup */
+        .shop-preview {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-top: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .shop-nav {
+            background: #fff;
+            padding: 10px 14px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: #666666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .qr-placeholder small {
-            font-size: 10px;
-            color: #999999;
+        .shop-nav .logo {
+            letter-spacing: -0.3px;
         }
 
-        /* Footer Notes */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding: 10px;
+            background: #fafafa;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 6px;
+            text-align: center;
+        }
+
+        .vial-graphic {
+            height: 45px;
+            margin: 4px auto;
+            background: #eef0f2;
+            border-radius: 4px;
+            position: relative;
+            width: 24px;
+            border: 1px solid #ddd;
+        }
+
+        .vial-graphic::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 2px; right: 2px; height: 6px;
+            background: #bd2130; /* default dark red cap */
+            border-radius: 2px 2px 0 0;
+        }
+        
+        .p-2 .vial-graphic::before { background: var(--green-accent); }
+        .p-3 .vial-graphic::before { background: #3498db; }
+
+        .product-title {
+            font-size: 0.65rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-price {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Footer info */
         footer {
             text-align: center;
-            font-size: 10px;
-            color: #777777;
-            margin-top: 8px;
-            line-height: 1.4;
-            letter-spacing: 0.2px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 24px;
+            line-height: 1.5;
+            border-top: 1px solid #eee;
+            padding-top: 16px;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
 <body>
 
-    <div class="spa-container">
-        
-        <!-- Top Status Bar Badges -->
+    <div class="container">
+        <!-- Top Status Bars -->
         <div class="top-badges">
             <div class="badge badge-green">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                Sikker • Privat • Anonymt
+                SIKKER • ANONYMT
             </div>
             <div class="badge badge-red">
-                <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.48 2 12s4.477 10 10 10zM11 7h2v6h-2V7zm0 8h2v2h-2v-2z"/></svg>
-                Tor • .Onion
+                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                TOR • .ONION
             </div>
         </div>
 
-        <!-- Header Title -->
+        <!-- Explanatory Header -->
         <header>
             <h1>Guide: Sådan besøger du AminoShop sikkert via Tor</h1>
+            <p>Denne applikation guider dig trin-for-trin til at downloade den korrekte browser og tilgå vores anonyme peptide-shop uden restriktioner.</p>
         </header>
 
-        <!-- Dynamic Steps Container -->
-        <div class="steps-wrapper">
-            
-            <!-- Step 1 -->
-            <div class="step-card">
+        <!-- Step 1: Smart OS Download -->
+        <div class="step-card step-1">
+            <div class="step-header">
                 <div class="step-number">1</div>
-                <div class="step-content">
-                    <div class="step-title">Hent Tor Browseren:</div>
-                    <div class="step-icons">
-                        <!-- OS Grid Mockup -->
-                        <svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zm9 0h7v7h-7zm-9 9h7v7H4zm9 0h7v7h-7z"/></svg>
-                        <!-- Onion Silhouette / Tech logo path -->
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                        <!-- Android -->
-                        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.44-2.5a.51.51 0 0 0-.18-.68.51.51 0 0 0-.68.18l-1.47 2.55C15.26 8.39 13.69 8 12 8s-3.26.39-4.71 1.03L5.82 6.48a.51.51 0 0 0-.68-.18.51.51 0 0 0-.18.68l1.44 2.5C3.76 11.23 2 13.9 2 17h20c0-3.1-1.76-5.77-4.4-7.52zM7 14.5A1.5 1.5 0 0 1 5.5 13 1.5 1.5 0 0 1 7 11.5 1.5 1.5 0 0 1 8.5 13a1.5 1.5 0 0 1-1.5 1.5zm10 0a1.5 1.5 0 0 1-1.5-1.5 1.5 1.5 0 0 1 1.5-1.5 1.5 1.5 0 0 1 1.5 1.5 1.5 1.5 0 0 1-1.5 1.5z"/></svg>
-                        <!-- Apple -->
-                        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.58 2.95-1.39z"/></svg>
-                    </div>
-                    <div class="step-details">
-                        • <strong>Windows/Linux/Android:</strong> Hent på Tors hjemmeside<br>
-                        • <strong>Apple iOS:</strong> Søg på 'Onion Browser' i App Store
-                    </div>
+                <div class="step-title">Hent Tor Browseren</div>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+                For at læse .onion sider skal du bruge den officielle og krypterede Tor Browser.
+            </p>
+            
+            <div class="os-detector">
+                <div class="os-status">Din enhed: <span id="detected-os">Søger...</span></div>
+                <a href="https://www.torproject.org/download/" id="dynamic-download-btn" class="download-btn" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                    <span id="download-btn-text">Hent til din enhed</span>
+                </a>
+                <span class="all-links-toggle" onclick="toggleLinks()">Vis downloads til andre enheder</span>
+                
+                <div class="all-links" id="all-links-box">
+                    <a href="https://www.torproject.org/download/" target="_blank">💻 Windows / Linux <span>Hent .exe / .tar</span></a>
+                    <a href="https://www.torproject.org/download/#android" target="_blank">🤖 Android <span>Google Play / APK</span></a>
+                    <a href="https://apps.apple.com/us/app/onion-browser/id519294248" target="_blank">🍏 iPhone / iPad <span>Onion Browser App</span></a>
                 </div>
             </div>
+        </div>
 
-            <!-- Step 2 -->
-            <div class="step-card">
+        <!-- Step 2: Live Copy and QR -->
+        <div class="step-card step-2">
+            <div class="step-header">
                 <div class="step-number">2</div>
-                <div class="step-content">
-                    <div class="step-title">Åbn shoppen via Tor:</div>
-                    <div class="step-icons">
-                        <!-- Copy/Paste Icon -->
-                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                        <!-- Scan Frame Icon -->
-                        <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h11v12z"/></svg>
-                    </div>
-                    <div class="step-details">
-                        Kopier .onion linket fra beskrivelsen, eller scan QR-koden nedenfor direkte i din Tor-app
+                <div class="step-title">Åbn shoppen via Tor</div>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+                Kopier vores adresse ind i din nye Tor Browser, eller scan koden direkte i appen:
+            </p>
+            
+            <div class="step-2-content">
+                <div class="link-copy-container">
+                    <div class="onion-input-wrapper">
+                        <input type="text" class="onion-link-text" id="onionLink" value="aminoshop557xyz...onion" readonly>
+                        <button class="copy-btn" onclick="copyLink()" title="Kopier link">
+                            <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        </button>
                     </div>
                 </div>
+                <div class="qr-side-box">
+                    <svg viewBox="0 0 24 24"><path d="M3 4h5V3H3c-1.1 0-2 .9-2 2v5h1V5c0-1.1.9-2 2-2zM1 19c0 1.1.9 2 2 2h5v-1H3c-1.1 0-2-.9-2-2v-5H1v5zm20 2c1.1 0 2-.9 2-2v-5h-1v5c0 1.1-.9 2-2 2h-5v1h5zM21 3c1.1 0 2 .9 2 2v5h-1V5c0-1.1-.9-2-2-2h-5V3h5zM4 5h3v3H4zm1 1v1h1V6zm3-1h3v3H8zm1 1v1h1V6zM4 9h3v3H4zm1 1v1h1v-1zm8-4h3v3h-3zm1 1v1h1V6zm-6 7h3v3H8zm1 1v1h1v-1zm4-3h3v3h-3zm1 1v1h1V11zm2 3h3v3h-3zm1 1v1h1v-1zm-4 2h3v3h-3zm1 1v1h1v-1z"/></svg>
+                    [.onion QR]<br>Indsæt kode
+                </div>
             </div>
+        </div>
 
-            <!-- Step 3 -->
-            <div class="step-card">
+        <!-- Step 3: Screenshot Shop Preview -->
+        <div class="step-card step-3">
+            <div class="step-header">
                 <div class="step-number">3</div>
-                <div class="step-content">
-                    <div class="step-title">Velkommen til AminoShop:</div>
-                    <div class="step-details">
-                        Du er nu landet sikkert på shoppen, klar til bestilling
+                <div class="step-title">Velkommen til AminoShop</div>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+                Når du bruger Tor, lander du direkte og sikkert på vores krypterede laboratorie-shop:
+            </p>
+            
+            <div class="shop-preview">
+                <div class="shop-nav">
+                    <div class="logo">🧪 AminoShop</div>
+                    <div style="color: var(--green-accent); font-size: 0.65rem;">● Forbindelse sikret</div>
+                </div>
+                <div class="shop-grid">
+                    <div class="product-card p-1">
+                        <div class="vial-graphic"></div>
+                        <div class="product-title">Retatrutide</div>
+                        <div class="product-price">600 kr</div>
                     </div>
-                    
-                    <!-- App Storefront Mockup Element inside SPA -->
-                    <div class="shop-preview">
-                        <div class="shop-preview-header">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#107c41"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                            <span>AminoShop — Officiel butik</span>
-                        </div>
-                        <div class="shop-preview-vials">
-                            <div class="vial">
-                                <div class="vial-cap"></div>
-                                <div class="vial-bottle"></div>
-                                <div class="vial-label">Retatru</div>
-                            </div>
-                            <div class="vial">
-                                <div class="vial-cap"></div>
-                                <div class="vial-bottle"></div>
-                                <div class="vial-label">Selank</div>
-                            </div>
-                            <div class="vial">
-                                <div class="vial-cap"></div>
-                                <div class="vial-bottle"></div>
-                                <div class="vial-label">Semax</div>
-                            </div>
-                        </div>
+                    <div class="product-card p-2">
+                        <div class="vial-graphic"></div>
+                        <div class="product-title">Selank</div>
+                        <div class="product-price">300 kr</div>
                     </div>
-
+                    <div class="product-card p-3">
+                        <div class="vial-graphic"></div>
+                        <div class="product-title">Semax</div>
+                        <div class="product-price">300 kr</div>
+                    </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- Interactive Dynamic QR Code Zone -->
-        <div class="qr-section">
-            <div class="qr-placeholder" onclick="alert('Indsæt dit rigtige .onion QR-kodebillede i denne container i dit projekt!')">
-                <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zm2 2v2h2V6zm0 7h2v2H6zm8-9h6v6h-6zm2 2v2h2V6zm-4 7h2v2h-2zm4 0h2v2h-2zm-4 4h2v2h-2zm4 0h2v2h-2zm2-4h2v2h-2zm0 4h2v2h-2zm-8 0h2v2H6zm0-4h2v2H6zm8-5h2v2h-2zm0 4h2v2h-2z"/></svg>
-                <span>QR KODE PLADS</span>
-                <small>Indsæt QR-kode her</small>
-            </div>
-        </div>
-
-        <!-- Footer Info Block -->
+        <!-- Footer -->
         <footer>
-            Sikker browsing anbefales • Brug kun officielle kilder • Hold din software opdateret
+            Sikker browsing anbefales • Brug kun officielle kilder • Hold din software opdateret<br>
+            <span style="font-size: 0.65rem; color: #999; display:block; margin-top:6px;">AminoShop © 2026</span>
         </footer>
-
     </div>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="copyToast">Link kopieret til udklipsholder!</div>
+
+    <script>
+        // OS Detection Logic
+        function detectOS() {
+            const userAgent = window.navigator.userAgent;
+            const platform = window.navigator.platform;
+            const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+            const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'];
+            const iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+            
+            const detectedSpn = document.getElementById('detected-os');
+            const btnText = document.getElementById('download-btn-text');
+            const btnLink = document.getElementById('dynamic-download-btn');
+
+            if (macosPlatforms.indexOf(platform) !== -1 || iosPlatforms.indexOf(platform) !== -1 || /iPhone|iPad/.test(userAgent)) {
+                detectedSpn.textContent = "Apple (iOS / macOS)";
+                btnText.textContent = "Hent Onion Browser i App Store";
+                btnLink.href = "https://apps.apple.com/us/app/onion-browser/id519294248";
+            } else if (/Android/.test(userAgent)) {
+                detectedSpn.textContent = "Android Enhed";
+                btnText.textContent = "Hent Tor til Android";
+                btnLink.href = "https://www.torproject.org/download/#android";
+            } else if (windowsPlatforms.indexOf(platform) !== -1) {
+                detectedSpn.textContent = "Windows PC";
+                btnText.textContent = "Hent Tor til Windows";
+                btnLink.href = "https://www.torproject.org/download/";
+            } else if (/Linux/.test(platform) || /Linux/.test(userAgent)) {
+                detectedSpn.textContent = "Linux PC";
+                btnText.textContent = "Hent Tor til Linux";
+                btnLink.href = "https://www.torproject.org/download/";
+            } else {
+                detectedSpn.textContent = "Universel enhed";
+                btnText.textContent = "Gå til downloads";
+                btnLink.href = "https://www.torproject.org/download/";
+            }
+        }
+
+        // Toggle visibility of alternative links
+        function toggleLinks() {
+            const box = document.getElementById('all-links-box');
+            if(box.style.display === 'flex') {
+                box.style.display = 'none';
+            } else {
+                box.style.display = 'flex';
+            }
+        }
+
+        // Copy Link Action
+        function copyLink() {
+            const copyText = document.getElementById("onionLink");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            navigator.clipboard.writeText(copyText.value);
+            
+            const toast = document.getElementById("copyToast");
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2500);
+        }
+
+        // Run detection on load
+        window.onload = detectOS;
+    </script>
 </body>
 </html>
