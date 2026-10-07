@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AminoShop - Tor Guide</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f7f7f9;
+            color: #111111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container mimic of a 9:16 mobile/reel slide aspect ratio */
+        .spa-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 24px;
+            padding: 32px 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            position: relative;
+        }
+
+        /* Top Badges */
+        .top-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #f0f0f4;
+        }
+
+        .badge-green {
+            background-color: #e2f7ec;
+            color: #107c41;
+        }
+
+        .badge-red {
+            background-color: #fdebee;
+            color: #a80000;
+        }
+
+        .badge svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        header h1 {
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.25;
+            color: #000000;
+            letter-spacing: -0.5px;
+        }
+
+        /* Main Guidesteps */
+        .steps-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .step-card {
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            gap: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        .step-number {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .step-card:nth-child(1) .step-number { background-color: #43a047; }
+        .step-card:nth-child(2) .step-number { background-color: #880e4f; }
+        .step-card:nth-child(3) .step-number { background-color: #2e7d32; }
+
+        .step-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000000;
+            margin-top: 6px;
+        }
+
+        .step-icons {
+            display: flex;
+            gap: 16px;
+            margin: 4px 0;
+            color: #555;
+        }
+
+        .step-icons svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .step-details {
+            font-size: 13px;
+            color: #444444;
+            line-height: 1.5;
+        }
+
+        .step-details ul {
+            list-style: none;
+        }
+
+        .step-details li {
+            margin-bottom: 4px;
+            position: relative;
+        }
+
+        /* Shop Preview Box in Step 3 */
+        .shop-preview {
+            border: 1px solid #e2e2e2;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 8px;
+            background: #fafafa;
+        }
+
+        .shop-preview-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .shop-preview-vials {
+            display: flex;
+            justify-content: space-around;
+            gap: 8px;
+        }
+
+        .vial {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: 6px;
+            padding: 6px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .vial-cap {
+            width: 14px;
+            height: 6px;
+            background: #999;
+            margin: 0 auto 2px;
+            border-radius: 2px;
+        }
+        .vial:nth-child(1) .vial-cap { background: #b71c1c; }
+        .vial:nth-child(2) .vial-cap { background: #2e7d32; }
+        .vial:nth-child(3) .vial-cap { background: #e65100; }
+
+        .vial-bottle {
+            width: 20px;
+            height: 26px;
+            border: 1px solid #bbb;
+            margin: 0 auto 4px;
+            border-radius: 3px;
+            background: rgba(0,0,0,0.02);
+        }
+
+        .vial-label {
+            font-size: 8px;
+            font-weight: bold;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* QR Code Block */
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        .qr-placeholder {
+            width: 140px;
+            height: 140px;
+            border: 1px dashed #cccccc;
+            border-radius: 16px;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .qr-placeholder:hover {
+            background: #f3f3f5;
+        }
+
+        .qr-placeholder svg {
+            width: 32px;
+            height: 32px;
+            fill: #999999;
+        }
+
+        .qr-placeholder span {
+            font-size: 11px;
+            font-weight: 700;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .qr-placeholder small {
+            font-size: 10px;
+            color: #999999;
+        }
+
+        /* Footer Notes */
+        footer {
+            text-align: center;
+            font-size: 10px;
+            color: #777777;
+            margin-top: 8px;
+            line-height: 1.4;
+            letter-spacing: 0.2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="spa-container">
+        
+        <!-- Top Status Bar Badges -->
+        <div class="top-badges">
+            <div class="badge badge-green">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Sikker • Privat • Anonymt
+            </div>
+            <div class="badge badge-red">
+                <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.48 2 12s4.477 10 10 10zM11 7h2v6h-2V7zm0 8h2v2h-2v-2z"/></svg>
+                Tor • .Onion
+            </div>
+        </div>
+
+        <!-- Header Title -->
+        <header>
+            <h1>Guide: Sådan besøger du AminoShop sikkert via Tor</h1>
+        </header>
+
+        <!-- Dynamic Steps Container -->
+        <div class="steps-wrapper">
+            
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">Hent Tor Browseren:</div>
+                    <div class="step-icons">
+                        <!-- OS Grid Mockup -->
+                        <svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zm9 0h7v7h-7zm-9 9h7v7H4zm9 0h7v7h-7z"/></svg>
+                        <!-- Onion Silhouette / Tech logo path -->
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <!-- Android -->
+                        <svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.44-2.5a.51.51 0 0 0-.18-.68.51.51 0 0 0-.68.18l-1.47 2.55C15.26 8.39 13.69 8 12 8s-3.26.39-4.71 1.03L5.82 6.48a.51.51 0 0 0-.68-.18.51.51 0 0 0-.18.68l1.44 2.5C3.76 11.23 2 13.9 2 17h20c0-3.1-1.76-5.77-4.4-7.52zM7 14.5A1.5 1.5 0 0 1 5.5 13 1.5 1.5 0 0 1 7 11.5 1.5 1.5 0 0 1 8.5 13a1.5 1.5 0 0 1-1.5 1.5zm10 0a1.5 1.5 0 0 1-1.5-1.5 1.5 1.5 0 0 1 1.5-1.5 1.5 1.5 0 0 1 1.5 1.5 1.5 1.5 0 0 1-1.5 1.5z"/></svg>
+                        <!-- Apple -->
+                        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.58 2.95-1.39z"/></svg>
+                    </div>
+                    <div class="step-details">
+                        • <strong>Windows/Linux/Android:</strong> Hent på Tors hjemmeside<br>
+                        • <strong>Apple iOS:</strong> Søg på 'Onion Browser' i App Store
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">Åbn shoppen via Tor:</div>
+                    <div class="step-icons">
+                        <!-- Copy/Paste Icon -->
+                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <!-- Scan Frame Icon -->
+                        <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h11v12z"/></svg>
+                    </div>
+                    <div class="step-details">
+                        Kopier .onion linket fra beskrivelsen, eller scan QR-koden nedenfor direkte i din Tor-app
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">Velkommen til AminoShop:</div>
+                    <div class="step-details">
+                        Du er nu landet sikkert på shoppen, klar til bestilling
+                    </div>
+                    
+                    <!-- App Storefront Mockup Element inside SPA -->
+                    <div class="shop-preview">
+                        <div class="shop-preview-header">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#107c41"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                            <span>AminoShop — Officiel butik</span>
+                        </div>
+                        <div class="shop-preview-vials">
+                            <div class="vial">
+                                <div class="vial-cap"></div>
+                                <div class="vial-bottle"></div>
+                                <div class="vial-label">Retatru</div>
+                            </div>
+                            <div class="vial">
+                                <div class="vial-cap"></div>
+                                <div class="vial-bottle"></div>
+                                <div class="vial-label">Selank</div>
+                            </div>
+                            <div class="vial">
+                                <div class="vial-cap"></div>
+                                <div class="vial-bottle"></div>
+                                <div class="vial-label">Semax</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Interactive Dynamic QR Code Zone -->
+        <div class="qr-section">
+            <div class="qr-placeholder" onclick="alert('Indsæt dit rigtige .onion QR-kodebillede i denne container i dit projekt!')">
+                <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zm2 2v2h2V6zm0 7h2v2H6zm8-9h6v6h-6zm2 2v2h2V6zm-4 7h2v2h-2zm4 0h2v2h-2zm-4 4h2v2h-2zm4 0h2v2h-2zm2-4h2v2h-2zm0 4h2v2h-2zm-8 0h2v2H6zm0-4h2v2H6zm8-5h2v2h-2zm0 4h2v2h-2z"/></svg>
+                <span>QR KODE PLADS</span>
+                <small>Indsæt QR-kode her</small>
+            </div>
+        </div>
+
+        <!-- Footer Info Block -->
+        <footer>
+            Sikker browsing anbefales • Brug kun officielle kilder • Hold din software opdateret
+        </footer>
+
+    </div>
+
+</body>
+</html>
